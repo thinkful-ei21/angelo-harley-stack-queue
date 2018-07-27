@@ -27,7 +27,10 @@ class Stack {
 }
 
 function peek(stack) {
-  console.log(stack.top.data);
+  if (stack.top === null) {
+    return null;
+  }
+  return stack.top.data;
 }
 
 function display(stack) {
