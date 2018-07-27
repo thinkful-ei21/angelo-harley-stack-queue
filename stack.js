@@ -13,11 +13,16 @@ class Stack {
   }
 
   push(data) {
-
+    this.top = new _Node(data, this.top);
   }
 
   pop() {
-      
+    if (this.top === null) {
+      return null;
+    }
+    const popped = this.top;
+    this.top = popped.next;
+    return popped.data;
   }
 }
 
