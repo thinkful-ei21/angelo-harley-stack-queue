@@ -1,7 +1,7 @@
 'use strict';
 
 const {Stack, peek, display} = require('./stack');
-const Queue = require('./queue');
+const {Queue, queuePeek, queueDisplay} = require('./queue');
 
 function main() {
   let starTrek = new Stack();
@@ -20,11 +20,20 @@ function main() {
   //   console.log(matching("([)]"));
   //   console.log(peek(new Stack()));
 
-  const test_data = [1, 4, 1, 7, 7, 2, 10, 1];
-  let test_stack = new Stack();
-  test_data.forEach(item => test_stack.push(item));
-  display(test_stack);
-  display(sortStack(test_stack));
+//   const test_data = [1, 4, 1, 7, 7, 2, 10, 1];
+//   let test_stack = new Stack();
+//   test_data.forEach(item => test_stack.push(item));
+//   display(test_stack);
+//   display(sortStack(test_stack));
+
+let queue = new Queue();
+queue.enqueue('Kirk');
+queue.enqueue('Spock');
+queue.enqueue('McCoy');
+queue.enqueue('Scotty');
+queue.dequeue();
+queue.dequeue();
+queueDisplay(queue);
 }
 
 main();

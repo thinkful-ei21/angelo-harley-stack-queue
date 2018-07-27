@@ -15,13 +15,46 @@ class Queue {
   }
 
   enqueue(data) {
+    const node = new _Node(data);
+    if (this.first === null) {
+      this.first = node;
+    }
 
+    if (this.last) {
+      node.next = this.last;
+      this.last.prev = node;
+    }
+
+    this.last = node;
   }
 
   dequeue() {
-      
+    if (this.first === null) {
+      return;
+    }
+
+    const node = this.first;
+    this.first = node.prev;
+    this.first.next = null;
+    return this.first;
   }
 
 }
 
-module.exports = Queue;
+function queuePeek(queue) {
+  return queue.first;
+}
+
+function queueDisplay(queue) {
+  let node = queue.first;
+
+  if (!node) {
+    return 'no queue';
+  }
+  while (node !== null) {
+    console.log(node.value);
+    node = node.prev;
+  }
+}
+
+module.exports = {Queue, queuePeek, queueDisplay};
