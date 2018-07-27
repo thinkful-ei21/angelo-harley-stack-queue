@@ -16,7 +16,7 @@ function main() {
 
     // is_palindrome("A man, a plan, a canal: Panama");
     console.log(matching('()"('));
-    // console.log(matching('[()]'));
+    console.log(matching("''"));
     // console.log(matching("([)]"));
 }
 
@@ -49,49 +49,57 @@ function is_palindrome(input) {
 function matching(input) {
     let stack = new Stack();
     let quotes = false;
-    for (let i = 0; i < input.length; i++) {
-        if (input[i] === '(') {
-            stack.push(input[i])
-        }
-
-        if (input[i] === '{') {
-            stack.push(input[i]);
-        }
-
-        if (input[i] === '[') {
-            stack.push(input[i]);
-        }
-
-        if (input[i] === ')') {
-            if (stack.pop() !== '(') {
-                return 'unmatched paren'
-            }
-        }
-
-        if (input[i] === '"') {
-            if (!quotes) {
-                stack.push(input[i])
-                quotes = true;
-            }
-            else if (stack.pop() !== input[i]) {
-                return 'unmatched quotes'
-            }
-        }
-
-        if (input[i] === '}') {
-            if (stack.pop() !== '{') {
-                return 'unmatched paren'
-            }
-        }
-        if (input[i] === ']') {
-            if (stack.pop() !== '[') {
-                return 'unmatched paren'
-            }
-        }
-    }
 
     if (stack.top !== null) {
         return 'unmatched paren';
+    }
+
+    for (let i = 0; i < input.length; i++) {
+        if (!quotes) {
+            if (input[i] === '(') {
+                stack.push(input[i])
+            }
+    
+            if (input[i] === '{') {
+                stack.push(input[i]);
+            }
+    
+            if (input[i] === '[') {
+                stack.push(input[i]);
+            }
+    
+            if (input[i] === ')') {
+                if (stack.pop() !== '(') {
+                    return 'unmatched paren';
+                }
+            }
+
+            if (input[i] === '"') {
+                stack.push(input[i]);
+                quotes = true;
+            }
+
+            if (input[i] === "'") {
+                stack.push(input[i]);
+                quotes = true;
+            }
+
+            if (input[i] === '}') {
+                if (stack.pop() !== '{') {
+                    return 'unmatched paren'
+                }
+            }
+            if (input[i] === ']') {
+                if (stack.pop() !== '[') {
+                    return 'unmatched paren'
+                }
+            }
+        } else {
+            if (input[i] !== '"' && input[i] !== "'") {
+                return 'unmatched quotes';
+            }
+
+        }
     }
 
     return 'matched';
